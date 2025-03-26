@@ -21,6 +21,7 @@ const handleGoogleLogin = async () => {
 };
 
 export default function LoginModal() {
+  
   return (
     <Dialog>
       <DialogTrigger asChild>
