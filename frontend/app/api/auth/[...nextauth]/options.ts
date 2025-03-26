@@ -30,24 +30,25 @@ export const authOption: AuthOptions = {
       account: Account | null;
     }) {
       try {
-        console.log('the user data is : ' + user);
-        console.log('the account data is : ' + account);
+        console.log('the user data is : ' , user);
+        console.log('the account data is : ' , account);
 
         const payload = {
           email: user.email,
           name: user.name,
-          oauth_id: account?.providerAccountId,
-          provider: account?.provider,
+          oauth_id: account?.providerAccountId!,
+          provider: account?.provider!,
           image: user?.image,
         };
 
         const { data } = await axios.post(LOGIN_URL, payload);
+
         user.id = data?.user?.id.toString();
         user.token = data?.user.token;
-        user.provider = data?.user.provider;
 
         return true;
       } catch (error) {
+        console.log('error while signing in', error);
         return false;
       }
     },

@@ -1,4 +1,3 @@
-import { Prisma } from '@prisma/client';
 import { Request, Response } from 'express';
 import prisma from '../config/db.config.js';
 import jwt from 'jsonwebtoken';
@@ -36,13 +35,13 @@ class AuthController {
       return res.json({
         message: 'User logged in successfully',
         user: {
-          findUser,
+          ...findUser,
           token: `Bearer ${token}`,
         },
       });
     } catch (error) {
       return res.status(500).json({
-        message: 'Error logging in user',
+        message: 'Error logging in user'
       });
     }
   }

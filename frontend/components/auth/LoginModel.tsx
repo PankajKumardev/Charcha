@@ -11,7 +11,7 @@ import { Button } from "../ui/button";
 import Image from "next/image";
 import { signIn } from "next-auth/react";
 import { DialogDescription } from "@radix-ui/react-dialog";
-import { Globe } from "lucide-react"; // Make sure to install lucide-react
+import { Globe } from "lucide-react"; 
 
 const handleGoogleLogin = async () => {
   signIn("google", {
