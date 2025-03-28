@@ -8,13 +8,51 @@ datasource db {
 }
 
 model User {
-  id         Int      @id @default(autoincrement())
-  name       String
-  email      String   @unique
+  id         Int         @id @default(autoincrement())
+  name       String      @db.VarChar(191)
+  email      String      @unique
   provider   String
   image      String?
   oauth_id   String
-  created_at DateTime @default(now())
+  created_at DateTime    @default(now())
+  ChatGroup  ChatGroup[]
 
   @@map("users")
+}
+
+model ChatGroup {
+  id         String       @id @default(cuid()) @db.Uuid
+  user       User         @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id    Int
+  title      String       @db.VarChar(191)
+  passcode   String       @db.VarChar(20)
+  created_at DateTime     @default(now())
+  GroupUsers GroupUsers[]
+  Chats      Chats[]
+
+  @@index([user_id, created_at])
+  @@map("chat_groups")
+}
+
+model GroupUsers {
+  id         String    @id @default(cuid())
+  group      ChatGroup @relation(fields: [group_id], references: [id], onDelete: Cascade)
+  group_id   String    @db.Uuid
+  name       String
+  created_at DateTime  @default(now())
+
+  @@map("group_users")
+}
+
+model Chats {
+  id         String    @id @default(cuid())
+  group      ChatGroup @relation(fields: [group_id], references: [id], onDelete: Cascade)
+  group_id   String    @db.Uuid
+  message    String?
+  name       String
+  file       String?
+  created_at DateTime  @default(now())
+
+  @@index([created_at])
+  @@map("chats")
 }

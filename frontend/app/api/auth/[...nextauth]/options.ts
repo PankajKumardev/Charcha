@@ -54,7 +54,6 @@ export const authOption: AuthOptions = {
     },
     async session({
       session,
-      user,
       token,
     }: {
       session: CustomSession;
