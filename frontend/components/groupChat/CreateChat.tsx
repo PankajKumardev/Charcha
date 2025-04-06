@@ -20,6 +20,7 @@ import { CustomUser } from '@/app/api/auth/[...nextauth]/options';
 import axios, { AxiosError } from 'axios';
 import { toast } from 'sonner';
 import { CHAT_GROUP_URL } from '@/lib/apiEndPoints';
+import { clearCache } from '@/actions/common';
 // import { clearCache } from '@/actions/common';
 
 export default function CreateChat({ user }: { user: CustomUser }) {
@@ -51,7 +52,7 @@ export default function CreateChat({ user }: { user: CustomUser }) {
         setLoading(false);
         setOpen(false);
         toast.success(data?.message);
-        // clearCache('dashboard');
+        clearCache('dashboard');
       }
       console.log('The payload is', payload);
       setLoading(false);
