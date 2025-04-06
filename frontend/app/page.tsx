@@ -8,7 +8,6 @@ import { getServerSession } from 'next-auth';
 import { fetchChatGroups } from './fetch/groupFetch';
 export default async function LandingPage() {
   const session: CustomSession | null = await getServerSession(authOption);
-  // Fetch chat groups
   const groups: Array<ChatGroupType> | [] = await fetchChatGroups(
     session?.user?.token!
   );
